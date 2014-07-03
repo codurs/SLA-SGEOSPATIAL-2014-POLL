@@ -4,8 +4,8 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*"
-		"facebook/php-sdk": "dev-master",
+		"laravel/framework": "4.2.*" ,
+		"facebook/php-sdk": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -15,7 +15,7 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
 		"psr-4": {
             "SGEOSPATIAL2014\\": "app/SGEOSPATIAL2014"
         }

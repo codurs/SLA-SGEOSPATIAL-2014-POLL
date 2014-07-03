@@ -21,13 +21,15 @@
 	    <hr>
 	    <a href="{{url('logout')}}">Logout</a>
 	@else
-		<div class="jumbotron">
-		    <h1>Facebook login example</h1>
-		    <p>Created by <a href="http://twitter.com/msurguy" target="_blank">Maks</a></p>
+		<div class="jumbotron text-center">
+		    <h1>Which is your favourite team?</h1>
+
 		    <p class="text-center">
 		      <a class="btn btn-lg btn-primary" href="{{url('login/fb')}}"><i class="icon-facebook"></i> Login with Facebook</a>
 		    </p>
 		</div>
 	@endif
+
+    <p class="text-right">Courtesy of <a href="http://twitter.com/codurs" target="_blank">CODURS</a></p>
 
 @stop

@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('moistybrgersmbp'),
+	'local' => array('moistybrgersmbp', 'ateequemmadsmbp.gateway.2wire.net'),
 
 ));
 

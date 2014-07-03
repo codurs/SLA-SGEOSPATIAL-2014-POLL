@@ -1,4 +1,6 @@
 <?php
+opcache_reset();
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
