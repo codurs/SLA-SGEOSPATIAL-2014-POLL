@@ -22,8 +22,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => '127.0.0.1',
 			'database'  => 'sgeospatial2014',
+            'port'      => '3306',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
