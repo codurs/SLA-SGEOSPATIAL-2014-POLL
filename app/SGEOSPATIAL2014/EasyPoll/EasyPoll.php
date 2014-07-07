@@ -36,7 +36,8 @@ class EasyPoll {
 
 		$vote = new \Vote([
 			'option_id' => $optionId,
-			'unique_identifier' => $uniqueIdentifier
+			'unique_identifier' => $uniqueIdentifier,
+            'user_id' => \Auth::user()->id
 		]);
 		$vote->save();
 

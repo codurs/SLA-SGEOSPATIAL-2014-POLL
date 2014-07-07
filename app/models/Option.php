@@ -10,7 +10,7 @@ class Option extends Ardent {
 		'poll_id' => 'required'
 	);
 
-	protected $fillable = array('title','poll_id');
+	protected $fillable = array('title','poll_id', 'description');
 
 	/**
 	 * Relationships
@@ -23,4 +23,5 @@ class Option extends Ardent {
 	public function votes() {
 		return $this->hasMany('Vote');
 	}
+
 }

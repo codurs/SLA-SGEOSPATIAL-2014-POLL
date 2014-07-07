@@ -70,5 +70,26 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
+    <script>
+        $(document).ready(function()
+            {
+                $("#table-teams .vote-button").click(function() {
+                    $this = this;
+                    $.ajax({
+                        type: "POST",
+                        url: 'vote/' + $($this).data('id'),
+                        success: function(data, status){
+                            $($this).text('Thank you!');
+                            counter = $($this).parent().siblings('.counter');
+                            counter.text(parseInt(counter.text()) + 1);
+                            $("#table-teams .vote-button").attr("disabled", "disabled");
+                        }
+                    });
+
+                });
+            }
+        );
+    </script>
+
   </body>
 </html>

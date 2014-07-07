@@ -14,13 +14,21 @@
 Route::get('/', function () {
     $data = array();
     $pageLiked = false;
+
     if (Auth::check()) {
         $data = Auth::user();
         $facebook = new Facebook(Config::get('facebook'));
         $pageLiked = $facebook->api(["method" => "pages.isFan", "page_id" => Config::get('facebook')['oneMapId']]);
     }
 
-    return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked));
+
+    return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked, 'poll' => Poll::find(1)));
+});
+
+
+Route::post('vote/{id}', function($id)
+{
+    EasyPoll::voteForOption($id);
 });
 
 

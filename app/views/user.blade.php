@@ -17,6 +17,7 @@
 
 @section('content')
 
+
             @if(Session::has('message'))
                 <div class="alert alert-success alert-dismissable">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -53,9 +54,6 @@
                             </script>
                     <div class="fb-like" data-href="https://facebook.com/OneMap" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
                 </div>
-                <div id="poll-container" class="{{ $pageLiked ? '' : 'hide'}}">
-                    @include('poll', array('some'=>'data'))
-                </div>
                 @endif
             @else
                 <h1>To get stared:</h1>
@@ -64,6 +62,9 @@
                 </p>
             @endif
 
+                <div id="poll-container" class="{{ $pageLiked ? '' : 'hide'}}">
+                    @include('poll', array('poll'=> $poll))
+                </div>
 		</div>
 
     <p class="text-right">Courtesy of <a href="https://facebook.com/codurs" target="_blank">CODURS</a></p>
