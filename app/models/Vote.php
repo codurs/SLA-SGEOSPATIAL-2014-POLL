@@ -7,7 +7,7 @@ class Vote extends Ardent {
 		'option_id' => 'required'
 	);
 
-	protected $fillable = array('option_id');
+	protected $fillable = array('option_id', 'user_id');
 
 	/**
 	 * Relationships
@@ -16,4 +16,8 @@ class Vote extends Ardent {
 	public function option() {
 		return $this->belongsTo('Option');
 	}
+
+    public function user() {
+        return $this->belongsTo('User');
+    }
 }

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:fb="http://www.facebook.com/2008/fbml" dir="ltr">
   <head>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Facebook integration for Laravel">
-    <meta name="author" content="Maks Surguy @msurguy">
-    
-    <title>Laravel and Facebook integration</title>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    <title>SGEOSPATIAL 2014 Poll</title>
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
     <style type="text/css">
 	    body {
@@ -19,6 +18,9 @@
 	    .navbar {
 	    	margin-bottom: 30px;
 	    }
+        .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+            display: none !important;
+        }
     </style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,7 +30,6 @@
   </head>
 
   <body>
-    <a href="https://github.com/msurguy/laravel-facebook-login" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 100000;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <div class="container">
       <!-- Static navbar -->
       <div class="navbar navbar-default">
@@ -38,19 +39,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://maxoffsky.com">Laravel App</a>
+          <a class="navbar-brand" href="#">SGEOSPATIAL 2014 Poll</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{url('/')}}">Home</a></li>
-            <li><a href="http://maxoffsky.com/code-blog/integrating-facebook-login-into-laravel-application/" target="_blank">Tutorial</a></li>
+            <li><a href="https://www.facebook.com/OneMap" target="_blank">Find us on Facebook</a></li>
           </ul>
           @if(Auth::check())
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Profile <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{{url('logout')}}">Logout</a></li>
+                <li> @yield('profile_details') </li>
+                <li class="text-right"><a href="{{url('logout')}}">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -65,8 +67,29 @@
 
     </div> <!-- /container -->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function()
+            {
+                $("#table-teams .vote-button").click(function() {
+                    $this = this;
+                    $.ajax({
+                        type: "POST",
+                        url: 'vote/' + $($this).data('id'),
+                        success: function(data, status){
+                            $($this).text('Thank you!');
+                            counter = $($this).parent().siblings('.counter');
+                            counter.text(parseInt(counter.text()) + 1);
+                            $("#table-teams .vote-button").attr("disabled", "disabled");
+                        }
+                    });
+
+                });
+            }
+        );
+    </script>
 
   </body>
 </html>

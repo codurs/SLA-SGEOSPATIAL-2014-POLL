@@ -18,6 +18,7 @@ class CreateOptionsTable extends Migration {
 			$table->integer('poll_id')->unsigned();
 			// The title of the option
 			$table->string('title');
+			$table->text('description');
 			$table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
 		});
 	}

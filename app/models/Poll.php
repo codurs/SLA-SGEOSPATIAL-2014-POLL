@@ -21,4 +21,5 @@ class Poll extends Ardent {
 	public function options() {
 		return $this->hasMany('Option');
 	}
+
 }
