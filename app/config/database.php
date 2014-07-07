@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'sla_sgeospatial2014',
-			'username'  => 'sla',
-			'password'  => 'sla2014',
+			'host'      => 'codurs.mysql.eu1.frbit.com',
+			'database'  => 'codurs',
+			'username'  => 'codurs',
+			'password'  => 'p8FhUJoY4iRad7jp',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
