@@ -63,7 +63,9 @@
             @endif
 
                 <div id="poll-container" class="{{ $pageLiked ? '' : 'hide'}}">
-                    @include('poll', array('poll'=> $poll))
+                    @if($poll)
+                        @include('poll', array('poll'=> $poll))
+                    @endif
                 </div>
 		</div>
 
