@@ -27,7 +27,7 @@
 
 			<div class="jumbotron text-center">
             @if (!empty($data))
-                @if(!$pageLiked)
+                @if(!$pageLiked && !$hasVoted)
                 <div id="like-fb-page-container">
                     <h1>Like the OneMap page to proceed</h1>
                         <div id="fb-root"></div>
@@ -62,10 +62,11 @@
                 </p>
             @endif
 
-                <div id="poll-container" class="{{ $pageLiked ? '' : 'hide'}}">
+                <div id="poll-container" class="{{ $pageLiked || $hasVoted ? ''  : 'hide'}}">
                     @include('poll', array('poll'=> $poll))
                 </div>
 		</div>
 
-    <p class="text-right">Courtesy of <a href="https://facebook.com/codurs" target="_blank">CODURS</a></p>
+    <h3 class="text-center text-muted">Courtesy of</h3>
+    <p class="text-center""><a href="https://facebook.com/codurs" target="_blank"><img src="{{ asset('codurs-logo.png') }}" width="200px"/></a></p>
 @stop

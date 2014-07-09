@@ -19,6 +19,8 @@ class CreateOptionsTable extends Migration {
 			// The title of the option
 			$table->string('title');
 			$table->text('description');
+            $table->text('image');
+            $table->string('school');
 			$table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
 		});
 	}

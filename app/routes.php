@@ -14,15 +14,18 @@
 Route::get('/', function () {
     $data = array();
     $pageLiked = false;
+    $hasVoted = false;
 
     if (Auth::check()) {
         $data = Auth::user();
-        $facebook = new Facebook(Config::get('facebook'));
-        $pageLiked = $facebook->api(["method" => "pages.isFan", "page_id" => Config::get('facebook')['oneMapId']]);
+        $hasVoted = \Vote::where('user_id', $data->id)->count() > 0;
+        if(!$hasVoted){
+            $facebook = new Facebook(Config::get('facebook'));
+            $pageLiked = $facebook->api(["method" => "pages.isFan", "uid" => $facebook->getUser(), "page_id" => Config::get('facebook')['oneMapId']]);
+        }
     }
 
-
-    return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked, 'poll' => Poll::find(1)));
+    return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked, 'poll' => Poll::find(1), 'hasVoted' => $hasVoted));
 });
 
 
@@ -36,7 +39,7 @@ Route::get('login/fb', function () {
     $facebook = new Facebook(Config::get('facebook'));
     $params = array(
         'redirect_uri' => url('/login/fb/callback'),
-        'scope' => 'email, user_likes, publish_actions',
+        'scope' => 'email, publish_actions',
     );
     return Redirect::to($facebook->getLoginUrl($params));
 });
@@ -50,11 +53,13 @@ Route::get('login/fb/callback', function () {
 
     if ($uid == 0) return Redirect::to('/')->with('message', 'There was an error');
 
+    $accessToken = $facebook->getAccessToken();
+
     $me = $facebook->api('/me');
 
     $profile = Profile::whereUid($uid)->first();
-    if (empty($profile)) {
 
+    if (empty($profile)) {
         $user = new User;
         $user->name = $me['first_name'] . ' ' . $me['last_name'];
         $user->email = $me['email'];
@@ -67,8 +72,7 @@ Route::get('login/fb/callback', function () {
         $profile->username = $me['id'];
         $profile = $user->profiles()->save($profile);
     }
-
-    $profile->access_token = $facebook->getAccessToken();
+    $profile->access_token = $accessToken;
     $profile->save();
 
     $user = $profile->user;

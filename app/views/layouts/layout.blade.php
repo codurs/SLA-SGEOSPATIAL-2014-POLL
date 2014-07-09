@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div>
       <!-- Static navbar -->
       <div class="navbar navbar-default">
         <div class="navbar-header">
