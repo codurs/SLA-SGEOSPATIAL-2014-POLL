@@ -1,10 +1,9 @@
 @if($hasVoted)
-<h1>Thank you for your vote. It counts!</h1>
+<h1 style="margin-bottom: 30px;">Thank you for your vote. It counts!</h1>
 @else
-
 <h1 style="margin-bottom: 30px;">{{ $poll->question }}</h1>
 <p class="text-muted" style="font-style: italic">You can only vote once...</p>
-
+@endif
 
 <div id="table-teams" class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -25,10 +24,10 @@
                 <td><img src="{{ $option->image }}" style="max-width: 300px;"/></td>
                 <td>{{ $option->description }}</td>
                 <td class="counter">{{ count($option->votes) }}</td>
-                <td><button class="vote-button btn btn-success" data-id="{{ $option->id }}" href="#" value="{{ $option->id }}"><i class="icon icon-thumbs-up"/></button></td>
+                @if(!$hasVoted)<td><button class="vote-button btn btn-success" data-id="{{ $option->id }}" href="#" value="{{ $option->id }}"><i class="icon icon-thumbs-up"/></button></td>@endif
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-@endif
+
