@@ -22,7 +22,7 @@
                 <td class="team-name"><h4>{{ $option->title }}</h4></td>
                 <td><h4>{{ $option->school }}</h4></td>
                 <td><img src="{{ $option->image }}" style="max-width: 300px;"/></td>
-                <td>{{ $option->description }}</td>
+                <td>{{ HTML::decode($option->description) }}</td>
                 <td class="counter">{{ count($option->votes) }}</td>
                 @if(!$hasVoted)<td><button class="vote-button btn btn-success" data-id="{{ $option->id }}" href="#" value="{{ $option->id }}"><i class="icon icon-thumbs-up"/></button></td>@endif
             </tr>
