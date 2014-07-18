@@ -19,13 +19,16 @@ Route::get('/', function () {
     if (Auth::check()) {
         $data = Auth::user();
         $hasVoted = \Vote::where('user_id', $data->id)->count() > 0;
-        if(!$hasVoted){
-            $facebook = new Facebook(Config::get('facebook'));
-            $pageLiked = $facebook->api(["method" => "pages.isFan", "uid" => $facebook->getUser(), "page_id" => Config::get('facebook')['oneMapId']]);
-        }
-    }
+        $facebook = new Facebook(Config::get('facebook'));
 
-    return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked, 'poll' => Poll::find(1), 'hasVoted' => $hasVoted));
+        $result = $facebook->api(array(
+            "method"    => "fql.query",
+            "query"     => "SELECT uid FROM page_fan WHERE uid=" . $facebook->getUser() . " AND page_id=" . Config::get('facebook')['oneMapId']));
+        if(count($result)){
+            $pageLiked = true;
+        }
+    } 
+     return View::make('user', array('data' => $data, 'pageLiked' => $pageLiked, 'poll' => Poll::find(1), 'hasVoted' => $hasVoted));
 });
 
 

@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'codurs.mysql.eu1.frbit.com',
-			'database'  => 'codurs',
-			'username'  => 'codurs',
-			'password'  => 'p8FhUJoY4iRad7jp',
+			'host'      => 'localhost',
+			'database'  => 'sgeospatial',
+			'username'  => 'qWsPsRAsWkecY',
+			'password'  => 'codurs!!!!',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
